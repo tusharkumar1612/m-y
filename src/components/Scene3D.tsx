@@ -5,6 +5,14 @@ import { Canvas, useFrame } from "@react-three/fiber";
 import { Float } from "@react-three/drei";
 import * as THREE from "three";
 
+// Seeded pseudo-random number generator for deterministic values
+function seededRandom(seed: number): () => number {
+  return function() {
+    seed = (seed * 9301 + 49297) % 233280;
+    return seed / 233280;
+  };
+}
+
 // Floating Dumbbell - Main gym element
 function FloatingDumbbell({ position, scale = 1, rotationSpeed = 0.5 }: { 
   position: [number, number, number]; 
@@ -172,32 +180,42 @@ function Kettlebell({ position, scale = 1 }: {
   );
 }
 
+// Pre-generate particle data outside component for purity
+const PARTICLE_SEED = 12345;
+const PARTICLE_COUNT = 80;
+
+function generateParticleData(count: number, seed: number) {
+  const random = seededRandom(seed);
+  const positions = new Float32Array(count * 3);
+  const colors = new Float32Array(count * 3);
+  
+  for (let i = 0; i < count; i++) {
+    positions[i * 3] = (random() - 0.5) * 18;
+    positions[i * 3 + 1] = (random() - 0.5) * 12;
+    positions[i * 3 + 2] = (random() - 0.5) * 6;
+    
+    // Red, orange, yellow particles
+    const colorChoice = random();
+    if (colorChoice < 0.4) {
+      colors[i * 3] = 0.94; colors[i * 3 + 1] = 0.27; colors[i * 3 + 2] = 0.27;
+    } else if (colorChoice < 0.7) {
+      colors[i * 3] = 0.98; colors[i * 3 + 1] = 0.45; colors[i * 3 + 2] = 0.09;
+    } else {
+      colors[i * 3] = 0.98; colors[i * 3 + 1] = 0.75; colors[i * 3 + 2] = 0.14;
+    }
+  }
+  
+  return { positions, colors };
+}
+
+// Pre-computed particle data
+const particleData = generateParticleData(PARTICLE_COUNT, PARTICLE_SEED);
+
 // Energy particles - Like sweat/energy in gym
-function EnergyParticles({ count = 60 }: { count?: number }) {
+function EnergyParticles() {
   const meshRef = useRef<THREE.Points>(null);
 
-  const [positions, colors] = useMemo(() => {
-    const positions = new Float32Array(count * 3);
-    const colors = new Float32Array(count * 3);
-    
-    for (let i = 0; i < count; i++) {
-      positions[i * 3] = (Math.random() - 0.5) * 18;
-      positions[i * 3 + 1] = (Math.random() - 0.5) * 12;
-      positions[i * 3 + 2] = (Math.random() - 0.5) * 6;
-      
-      // Red, orange, yellow particles
-      const colorChoice = Math.random();
-      if (colorChoice < 0.4) {
-        colors[i * 3] = 0.94; colors[i * 3 + 1] = 0.27; colors[i * 3 + 2] = 0.27;
-      } else if (colorChoice < 0.7) {
-        colors[i * 3] = 0.98; colors[i * 3 + 1] = 0.45; colors[i * 3 + 2] = 0.09;
-      } else {
-        colors[i * 3] = 0.98; colors[i * 3 + 1] = 0.75; colors[i * 3 + 2] = 0.14;
-      }
-    }
-    
-    return [positions, colors];
-  }, [count]);
+  const { positions, colors } = useMemo(() => particleData, []);
 
   useFrame((state) => {
     if (meshRef.current) {
@@ -248,7 +266,7 @@ export default function Scene3D() {
         <Kettlebell position={[2, -2, 0]} scale={0.8} />
         <Kettlebell position={[-3.5, -0.5, 1]} scale={0.6} />
         
-        <EnergyParticles count={80} />
+        <EnergyParticles />
       </Canvas>
     </div>
   );
