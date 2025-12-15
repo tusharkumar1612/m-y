@@ -12,6 +12,7 @@ import {
   Dumbbell,
   Activity,
   ArrowRight,
+  ChevronRight,
 } from "lucide-react";
 
 const amenities = [
@@ -85,6 +86,10 @@ export default function AmenitiesSection() {
           <p className="text-gray-600 text-lg max-w-2xl mx-auto">
             Everything you need to achieve your fitness goals under one roof
           </p>
+          {/* Mobile hint */}
+          <p className="text-sm text-orange-500 mt-4 sm:hidden flex items-center justify-center gap-1">
+            <span>👆</span> Tap any card to learn more
+          </p>
         </motion.div>
 
         {/* Amenities grid */}
@@ -98,12 +103,19 @@ export default function AmenitiesSection() {
             >
               <Link href={`/amenities/${amenity.slug}`}>
                 <motion.div
-                  className="group relative p-6 rounded-2xl bg-white border border-gray-200 cursor-pointer overflow-hidden icon-card"
+                  className="group relative p-6 rounded-2xl bg-white border border-gray-200 cursor-pointer overflow-hidden icon-card active:scale-[0.98] transition-transform"
                   whileHover={{ scale: 1.02 }}
                   whileTap={{ scale: 0.98 }}
                 >
                   {/* Hover background effect */}
                   <div className={`absolute inset-0 bg-gradient-to-br ${amenity.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                  
+                  {/* Mobile tap indicator - always visible on mobile */}
+                  <div className="absolute top-4 right-4 sm:hidden">
+                    <div className={`w-8 h-8 rounded-full bg-gradient-to-br ${amenity.color} flex items-center justify-center shadow-md`}>
+                      <ChevronRight className="w-4 h-4 text-white" />
+                    </div>
+                  </div>
                   
                   <div className="relative">
                     {/* Icon */}
@@ -119,8 +131,8 @@ export default function AmenitiesSection() {
                     </h3>
                     <p className="text-gray-600 mb-4">{amenity.description}</p>
 
-                    {/* Arrow link */}
-                    <div className="flex items-center gap-2 text-sm font-semibold text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                    {/* Arrow link - visible on hover for desktop, always visible on mobile */}
+                    <div className="flex items-center gap-2 text-sm font-semibold text-orange-500 sm:opacity-0 sm:group-hover:opacity-100 transition-opacity">
                       <span>Learn More</span>
                       <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
                     </div>
