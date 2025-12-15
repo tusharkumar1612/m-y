@@ -5,127 +5,67 @@ import { useInView } from "framer-motion";
 import { useRef } from "react";
 import Link from "next/link";
 import {
-  Droplets,
+  Flame,
   Users,
-  Ticket,
+  Gift,
   Music,
   Dumbbell,
   Activity,
-  Heart,
-  Timer,
-  Snowflake,
-  Flame as FireIcon,
-  Sparkles,
-  Trophy,
   ArrowRight,
 } from "lucide-react";
 
 const amenities = [
   {
-    id: "steam-bath",
-    icon: <Droplets className="w-6 h-6" />,
+    icon: <Flame className="w-7 h-7" />,
     title: "Steam Bath",
-    color: "bg-blue-500",
+    description: "Premium steam & recovery zone",
+    color: "from-orange-500 to-amber-500",
+    slug: "steam-bath",
   },
   {
-    id: "ice-bath",
-    icon: <Snowflake className="w-6 h-6" />,
-    title: "Ice Bath",
-    color: "bg-cyan-500",
-  },
-  {
-    id: "personal-trainers",
-    icon: <Users className="w-6 h-6" />,
+    icon: <Users className="w-7 h-7" />,
     title: "Personal Trainers",
-    color: "bg-red-500",
+    description: "Expert certified trainers",
+    color: "from-amber-500 to-yellow-500",
+    slug: "personal-trainers",
   },
   {
-    id: "free-trial",
-    icon: <Ticket className="w-6 h-6" />,
+    icon: <Gift className="w-7 h-7" />,
     title: "Free Trial",
-    color: "bg-green-500",
+    description: "Experience before you commit",
+    color: "from-green-500 to-emerald-500",
+    slug: "free-trial",
   },
   {
-    id: "zumba-classes",
-    icon: <Music className="w-6 h-6" />,
+    icon: <Music className="w-7 h-7" />,
     title: "Zumba Classes",
-    color: "bg-pink-500",
+    description: "Dance your way to fitness",
+    color: "from-pink-500 to-rose-500",
+    slug: "zumba-classes",
   },
   {
-    id: "strength-training",
-    icon: <Dumbbell className="w-6 h-6" />,
+    icon: <Dumbbell className="w-7 h-7" />,
     title: "Strength Training",
-    color: "bg-orange-500",
+    description: "Premium equipment & machines",
+    color: "from-blue-500 to-cyan-500",
+    slug: "strength-training",
   },
   {
-    id: "functional-workouts",
-    icon: <Activity className="w-6 h-6" />,
+    icon: <Activity className="w-7 h-7" />,
     title: "Functional Workouts",
-    color: "bg-yellow-500",
-  },
-  {
-    id: "crossfit",
-    icon: <FireIcon className="w-6 h-6" />,
-    title: "CrossFit",
-    color: "bg-red-600",
-  },
-  {
-    id: "power-yoga",
-    icon: <Heart className="w-6 h-6" />,
-    title: "Power Yoga",
-    color: "bg-purple-500",
-  },
-  {
-    id: "hiit-training",
-    icon: <Timer className="w-6 h-6" />,
-    title: "HIIT Training",
-    color: "bg-amber-500",
-  },
-  {
-    id: "recovery-zone",
-    icon: <Sparkles className="w-6 h-6" />,
-    title: "Recovery Zone",
-    color: "bg-indigo-500",
-  },
-  {
-    id: "body-transform",
-    icon: <Trophy className="w-6 h-6" />,
-    title: "Body Transform",
-    color: "bg-gradient-to-r from-red-500 to-orange-500",
+    description: "CrossFit, HIIT & more",
+    color: "from-purple-500 to-violet-500",
+    slug: "functional-workouts",
   },
 ];
-
-const containerVariants = {
-  hidden: { opacity: 0 },
-  visible: {
-    opacity: 1,
-    transition: {
-      staggerChildren: 0.06,
-    },
-  },
-};
-
-const itemVariants = {
-  hidden: { opacity: 0, scale: 0.8 },
-  visible: { opacity: 1, scale: 1 },
-};
 
 export default function AmenitiesSection() {
   const ref = useRef(null);
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="amenities" className="relative py-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-black" />
-      <div className="absolute inset-0 gym-stripes opacity-50" />
-      <div className="absolute inset-0 weight-plate-bg opacity-20" />
-      
-      {/* Accent glows */}
-      <div className="absolute top-1/3 left-0 w-96 h-96 bg-red-600/10 rounded-full blur-[150px]" />
-      <div className="absolute bottom-1/3 right-0 w-96 h-96 bg-orange-500/10 rounded-full blur-[150px]" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
+    <section id="amenities" className="relative py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         {/* Section header */}
         <motion.div
           initial={{ opacity: 0, y: 30 }}
@@ -133,77 +73,63 @@ export default function AmenitiesSection() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-700 mb-6">
-            <Dumbbell className="w-4 h-4 text-red-500" />
-            <span className="text-sm font-black text-zinc-300 tracking-wider uppercase">Premium Facilities</span>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-sm font-semibold text-orange-600 mb-6">
+            World-Class Facilities
           </span>
           <h2
-            className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 uppercase tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-4"
             style={{ fontFamily: "var(--font-bebas)" }}
           >
             Our <span className="gradient-text">Amenities</span>
           </h2>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-            Click on any amenity to explore in detail
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Everything you need to achieve your fitness goals under one roof
           </p>
         </motion.div>
 
         {/* Amenities grid */}
-        <motion.div
-          variants={containerVariants}
-          initial="hidden"
-          animate={isInView ? "visible" : "hidden"}
-          className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-4 lg:grid-cols-6 gap-4"
-        >
+        <div className="grid sm:grid-cols-2 lg:grid-cols-3 gap-6">
           {amenities.map((amenity, index) => (
-            <motion.div key={index} variants={itemVariants}>
-              <Link
-                href={`/amenities/${amenity.id}`}
-                className="icon-card group relative p-5 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-red-500/50 text-center overflow-hidden block cursor-pointer"
-              >
-                {/* Hover glow */}
-                <div className="absolute inset-0 bg-gradient-to-br from-red-500/0 to-orange-500/0 group-hover:from-red-500/10 group-hover:to-orange-500/5 transition-all duration-500" />
-                
-                {/* Icon */}
-                <div className={`relative w-12 h-12 mx-auto rounded-lg ${amenity.color} flex items-center justify-center text-white mb-3 group-hover:scale-110 transition-transform shadow-lg`}>
-                  {amenity.icon}
-                </div>
+            <motion.div
+              key={amenity.title}
+              initial={{ opacity: 0, y: 30 }}
+              animate={isInView ? { opacity: 1, y: 0 } : {}}
+              transition={{ duration: 0.5, delay: index * 0.1 }}
+            >
+              <Link href={`/amenities/${amenity.slug}`}>
+                <motion.div
+                  className="group relative p-6 rounded-2xl bg-white border border-gray-200 cursor-pointer overflow-hidden icon-card"
+                  whileHover={{ scale: 1.02 }}
+                  whileTap={{ scale: 0.98 }}
+                >
+                  {/* Hover background effect */}
+                  <div className={`absolute inset-0 bg-gradient-to-br ${amenity.color} opacity-0 group-hover:opacity-5 transition-opacity duration-300`} />
+                  
+                  <div className="relative">
+                    {/* Icon */}
+                    <div
+                      className={`w-14 h-14 rounded-xl bg-gradient-to-br ${amenity.color} flex items-center justify-center text-white mb-4 shadow-lg group-hover:scale-110 transition-transform`}
+                    >
+                      {amenity.icon}
+                    </div>
 
-                {/* Title */}
-                <h3 className="text-sm font-bold text-white uppercase tracking-wide mb-2">
-                  {amenity.title}
-                </h3>
+                    {/* Content */}
+                    <h3 className="text-xl font-bold text-gray-900 mb-2 group-hover:text-orange-600 transition-colors">
+                      {amenity.title}
+                    </h3>
+                    <p className="text-gray-600 mb-4">{amenity.description}</p>
 
-                {/* View more indicator */}
-                <div className="flex items-center justify-center gap-1 text-xs text-zinc-500 group-hover:text-red-400 transition-colors">
-                  <span>View</span>
-                  <ArrowRight className="w-3 h-3 group-hover:translate-x-1 transition-transform" />
-                </div>
+                    {/* Arrow link */}
+                    <div className="flex items-center gap-2 text-sm font-semibold text-orange-500 opacity-0 group-hover:opacity-100 transition-opacity">
+                      <span>Learn More</span>
+                      <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+                    </div>
+                  </div>
+                </motion.div>
               </Link>
             </motion.div>
           ))}
-        </motion.div>
-
-        {/* Bottom CTA */}
-        <motion.div
-          initial={{ opacity: 0, y: 30 }}
-          animate={isInView ? { opacity: 1, y: 0 } : {}}
-          transition={{ duration: 0.8, delay: 0.8 }}
-          className="text-center mt-16"
-        >
-          <p className="text-zinc-400 mb-6">
-            Ready to experience Jaipur&apos;s best gym?
-          </p>
-          <motion.button
-            onClick={() => document.querySelector("#form")?.scrollIntoView({ behavior: "smooth" })}
-            className="inline-flex items-center gap-2 px-8 py-4 bg-gradient-to-r from-red-600 to-orange-500 rounded-xl text-white font-black text-lg hover:scale-105 transition-transform fire-glow uppercase tracking-wide"
-            whileHover={{ scale: 1.05 }}
-            whileTap={{ scale: 0.98 }}
-          >
-            <FireIcon className="w-5 h-5" />
-            <span>Start Training Today</span>
-          </motion.button>
-        </motion.div>
+        </div>
       </div>
     </section>
   );

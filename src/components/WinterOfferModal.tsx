@@ -2,7 +2,7 @@
 
 import { motion, AnimatePresence } from "framer-motion";
 import { useState, useEffect } from "react";
-import { X, Snowflake, Gift, Flame, ArrowRight, Dumbbell } from "lucide-react";
+import { X, Snowflake, Gift, ArrowRight } from "lucide-react";
 
 export default function WinterOfferModal() {
   const [isOpen, setIsOpen] = useState(false);
@@ -10,7 +10,7 @@ export default function WinterOfferModal() {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsOpen(true);
-    }, 2000);
+    }, 2500);
 
     return () => clearTimeout(timer);
   }, []);
@@ -32,115 +32,100 @@ export default function WinterOfferModal() {
             animate={{ opacity: 1 }}
             exit={{ opacity: 0 }}
             onClick={() => setIsOpen(false)}
-            className="fixed inset-0 z-50 bg-black/80 backdrop-blur-sm"
+            className="fixed inset-0 z-50 bg-black/50 backdrop-blur-sm"
           />
 
           {/* Modal */}
           <motion.div
-            initial={{ opacity: 0, scale: 0.8, y: 50 }}
+            initial={{ opacity: 0, scale: 0.9, y: 30 }}
             animate={{ opacity: 1, scale: 1, y: 0 }}
-            exit={{ opacity: 0, scale: 0.8, y: 50 }}
+            exit={{ opacity: 0, scale: 0.9, y: 30 }}
             transition={{ type: "spring", damping: 25, stiffness: 300 }}
             className="fixed inset-0 z-50 flex items-center justify-center p-4 pointer-events-none"
           >
-            <div className="relative w-full max-w-lg pointer-events-auto">
-              {/* Decorative elements */}
-              <div className="absolute -top-6 -left-6 text-3xl">❄️</div>
-              <div className="absolute -top-4 -right-4 text-2xl" style={{ animationDelay: "0.3s" }}>🔥</div>
-              <div className="absolute -bottom-4 -left-4 text-2xl">💪</div>
-              <div className="absolute -bottom-6 -right-6 text-3xl">❄️</div>
-
+            <div className="relative w-full max-w-md pointer-events-auto">
               {/* Modal content */}
-              <div className="relative overflow-hidden rounded-2xl border-4 border-red-500 breathing-glow bg-gradient-to-br from-zinc-950 via-zinc-900 to-zinc-950">
-                {/* Gym pattern overlay */}
-                <div className="absolute inset-0 gym-stripes opacity-30" />
+              <div className="relative overflow-hidden rounded-3xl bg-white shadow-clean-lg breathing-glow">
+                {/* Top accent bar - Orange gradient */}
+                <div className="h-2 bg-gradient-to-r from-orange-500 via-amber-500 to-orange-500" />
                 
                 {/* Close button */}
                 <button
                   onClick={() => setIsOpen(false)}
-                  className="absolute top-4 right-4 z-10 p-2 rounded-full bg-zinc-800 hover:bg-zinc-700 transition-colors border border-zinc-600"
+                  className="absolute top-4 right-4 z-10 p-2 rounded-full bg-gray-100 hover:bg-gray-200 transition-colors"
                 >
-                  <X className="w-5 h-5 text-white" />
+                  <X className="w-5 h-5 text-gray-600" />
                 </button>
 
-                {/* Red accent glow */}
-                <div className="absolute top-0 left-1/3 w-40 h-40 bg-red-600/30 rounded-full blur-3xl" />
-                <div className="absolute bottom-0 right-1/3 w-40 h-40 bg-orange-500/20 rounded-full blur-3xl" />
+                {/* Decorative snowflakes */}
+                <div className="absolute top-8 left-8 text-blue-200 opacity-50">
+                  <Snowflake className="w-8 h-8" />
+                </div>
+                <div className="absolute top-16 right-16 text-blue-200 opacity-30">
+                  <Snowflake className="w-6 h-6" />
+                </div>
 
                 {/* Content */}
-                <div className="relative p-8 text-center">
+                <div className="p-8 pt-6 text-center">
                   {/* Badge */}
                   <motion.div
-                    initial={{ y: -20, opacity: 0 }}
+                    initial={{ y: -10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
                     transition={{ delay: 0.2 }}
-                    className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-zinc-800 border border-zinc-600 mb-6"
+                    className="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-blue-50 border border-blue-100 mb-6"
                   >
-                    <Snowflake className="w-4 h-4 text-blue-400 animate-spin" style={{ animationDuration: "4s" }} />
-                    <span className="text-sm font-black text-zinc-300 tracking-wider uppercase">Winter Special</span>
-                    <Flame className="w-4 h-4 text-red-500 animate-pulse" />
-                  </motion.div>
-
-                  {/* Icon */}
-                  <motion.div
-                    initial={{ scale: 0, rotate: -180 }}
-                    animate={{ scale: 1, rotate: 0 }}
-                    transition={{ delay: 0.3, type: "spring" }}
-                    className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-red-600 to-orange-500 rounded-xl flex items-center justify-center fire-glow"
-                  >
-                    <Dumbbell className="w-8 h-8 text-white" />
+                    <Snowflake className="w-4 h-4 text-blue-500" />
+                    <span className="text-sm font-semibold text-blue-700">Winter Special</span>
                   </motion.div>
 
                   {/* Main offer */}
                   <motion.div
-                    initial={{ scale: 0.8, opacity: 0 }}
+                    initial={{ scale: 0.9, opacity: 0 }}
                     animate={{ scale: 1, opacity: 1 }}
-                    transition={{ delay: 0.4, type: "spring" }}
+                    transition={{ delay: 0.3 }}
                     className="mb-6"
                   >
-                    <div className="flex items-center justify-center gap-2 mb-2">
-                      <Gift className="w-6 h-6 text-yellow-400" />
-                      <h2 className="text-3xl sm:text-4xl font-black text-white uppercase tracking-tight" style={{ fontFamily: "var(--font-bebas)" }}>
+                    <div className="flex items-center justify-center gap-2 mb-3">
+                      <Gift className="w-6 h-6 text-orange-500" />
+                      <h2 className="text-2xl font-bold text-gray-900">
                         1 Day Free Pass
                       </h2>
-                      <Gift className="w-6 h-6 text-yellow-400" />
                     </div>
-                    <div className="text-5xl sm:text-6xl font-black gradient-text py-1 tracking-tight" style={{ fontFamily: "var(--font-bebas)" }}>
+                    <div className="text-5xl font-black gradient-text" style={{ fontFamily: "var(--font-bebas)" }}>
                       + 30% OFF
                     </div>
-                    <p className="text-zinc-400 mt-2 font-medium">
+                    <p className="text-gray-500 mt-2">
                       On All Membership Plans
                     </p>
                   </motion.div>
 
                   {/* Features */}
                   <motion.div
-                    initial={{ y: 20, opacity: 0 }}
+                    initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.5 }}
+                    transition={{ delay: 0.4 }}
                     className="flex flex-wrap justify-center gap-2 mb-8"
                   >
-                    {["Expert Trainers", "Steam Bath", "Group Classes"].map((feature, i) => (
+                    {["Personal Training", "Steam Bath", "Group Classes"].map((feature, i) => (
                       <span
                         key={i}
-                        className="px-3 py-1.5 rounded-lg bg-zinc-800 border border-zinc-700 text-xs text-zinc-300 font-bold uppercase tracking-wide"
+                        className="px-3 py-1 rounded-full bg-gray-100 text-xs font-medium text-gray-700"
                       >
                         ✓ {feature}
                       </span>
                     ))}
                   </motion.div>
 
-                  {/* CTA Button */}
+                  {/* CTA Button - Orange */}
                   <motion.button
-                    initial={{ y: 20, opacity: 0 }}
+                    initial={{ y: 10, opacity: 0 }}
                     animate={{ y: 0, opacity: 1 }}
-                    transition={{ delay: 0.6 }}
+                    transition={{ delay: 0.5 }}
                     onClick={scrollToForm}
-                    className="group w-full py-4 px-8 bg-gradient-to-r from-red-600 to-orange-500 rounded-xl text-white font-black text-lg flex items-center justify-center gap-3 hover:from-red-500 hover:to-orange-400 transition-all fire-glow uppercase tracking-wide"
+                    className="group w-full py-4 px-6 bg-gradient-to-r from-orange-500 to-amber-500 rounded-xl text-white font-semibold text-lg flex items-center justify-center gap-2 btn-glow"
                     whileHover={{ scale: 1.02 }}
                     whileTap={{ scale: 0.98 }}
                   >
-                    <Flame className="w-5 h-5" />
                     <span>Claim Your Free Pass</span>
                     <ArrowRight className="w-5 h-5 group-hover:translate-x-1 transition-transform" />
                   </motion.button>
@@ -149,10 +134,10 @@ export default function WinterOfferModal() {
                   <motion.p
                     initial={{ opacity: 0 }}
                     animate={{ opacity: 1 }}
-                    transition={{ delay: 0.7 }}
-                    className="mt-4 text-sm text-red-400 font-bold uppercase tracking-wide"
+                    transition={{ delay: 0.6 }}
+                    className="mt-4 text-sm text-gray-500"
                   >
-                    ⏰ Limited Time — Don&apos;t Miss Out!
+                    ⏰ Limited time offer — Ends soon!
                   </motion.p>
                 </div>
               </div>

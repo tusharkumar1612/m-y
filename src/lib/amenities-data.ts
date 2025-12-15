@@ -1,30 +1,74 @@
-export interface AmenityDetail {
-  id: string;
+import { ReactNode } from "react";
+import {
+  Flame,
+  Users,
+  Gift,
+  Music,
+  Dumbbell,
+  Activity,
+  Droplets,
+  Snowflake,
+  Heart,
+  Timer,
+  Sparkles,
+  Trophy,
+  Target,
+  Zap,
+} from "lucide-react";
+import { createElement } from "react";
+
+export interface FeatureItem {
+  icon: ReactNode;
   title: string;
-  shortDesc: string;
   description: string;
-  features: string[];
-  benefits: string[];
-  schedule?: string;
-  trainer?: string;
-  image: string;
-  gallery: string[];
-  icon: string;
-  color: string;
 }
 
-export const amenitiesData: AmenityDetail[] = [
-  {
-    id: "steam-bath",
+export interface ScheduleItem {
+  day: string;
+  time: string;
+}
+
+export interface TrainerInfo {
+  name: string;
+  experience: string;
+}
+
+export interface AmenityDetail {
+  title: string;
+  tagline: string;
+  category: string;
+  description: string;
+  longDescription: string;
+  heroImage: string;
+  gallery: string[];
+  icon: ReactNode;
+  color: string;
+  features: FeatureItem[];
+  benefits: string[];
+  schedule: ScheduleItem[];
+  trainer?: TrainerInfo;
+}
+
+export const amenitiesData: Record<string, AmenityDetail> = {
+  "steam-bath": {
     title: "Steam Bath",
-    shortDesc: "Relax and detoxify",
-    description: "Our premium steam bath facility offers a rejuvenating experience that helps you relax after an intense workout. The steam room is designed with modern amenities and maintained at optimal temperatures for maximum benefit.",
+    tagline: "Relax, recover, and rejuvenate after your workout",
+    category: "Recovery & Wellness",
+    description: "Our premium steam bath facility offers a rejuvenating experience that helps you relax after an intense workout.",
+    longDescription: "The steam room is designed with modern amenities and maintained at optimal temperatures for maximum benefit. Experience deep relaxation as the warm steam opens your pores, promotes detoxification, and helps your muscles recover faster. Our facilities are kept impeccably clean with separate areas for men and women.",
+    heroImage: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800",
+      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800",
+      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800",
+    ],
+    icon: createElement(Droplets, { className: "w-5 h-5" }),
+    color: "from-orange-500 to-amber-500",
     features: [
-      "Temperature-controlled steam rooms",
-      "Eucalyptus-infused steam option",
-      "Clean towel service",
-      "Separate facilities for men and women",
-      "Pre and post-workout sessions available",
+      { icon: createElement(Target, { className: "w-5 h-5" }), title: "Optimal Temperature", description: "Maintained at perfect heat levels" },
+      { icon: createElement(Sparkles, { className: "w-5 h-5" }), title: "Eucalyptus Steam", description: "Aromatic wellness option" },
+      { icon: createElement(Users, { className: "w-5 h-5" }), title: "Separate Facilities", description: "Privacy for all genders" },
+      { icon: createElement(Timer, { className: "w-5 h-5" }), title: "Flexible Timing", description: "Pre and post-workout sessions" },
     ],
     benefits: [
       "Improves blood circulation",
@@ -34,58 +78,30 @@ export const amenitiesData: AmenityDetail[] = [
       "Helps with respiratory conditions",
       "Aids in post-workout recovery",
     ],
-    schedule: "Available daily: 6:00 AM - 10:00 PM",
-    image: "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800",
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800",
-      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800",
+    schedule: [
+      { day: "Mon - Sat", time: "6:00 AM - 10:00 PM" },
+      { day: "Sunday", time: "8:00 AM - 8:00 PM" },
     ],
-    icon: "Droplets",
-    color: "from-blue-500 to-cyan-400",
   },
-  {
-    id: "ice-bath",
-    title: "Ice Bath",
-    shortDesc: "Enhanced recovery",
-    description: "Experience the power of cold therapy with our professional ice bath facility. Cold immersion is used by elite athletes worldwide to accelerate recovery, reduce inflammation, and boost mental resilience.",
-    features: [
-      "Temperature maintained at 10-15°C",
-      "Professional supervision available",
-      "Timer systems for safe sessions",
-      "Warm-up area nearby",
-      "Recovery guidance from trainers",
-    ],
-    benefits: [
-      "Reduces muscle inflammation",
-      "Speeds up recovery time",
-      "Boosts immune system",
-      "Increases mental toughness",
-      "Improves circulation",
-      "Reduces delayed onset muscle soreness (DOMS)",
-    ],
-    schedule: "Available daily: 7:00 AM - 9:00 PM",
-    image: "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1576013551627-0cc20b96c2a7?w=800",
-      "https://images.unsplash.com/photo-1571019613454-1cb2f99b2d8b?w=800",
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800",
-    ],
-    icon: "Snowflake",
-    color: "from-cyan-400 to-blue-300",
-  },
-  {
-    id: "personal-trainers",
+  "personal-trainers": {
     title: "Personal Trainers",
-    shortDesc: "Expert guidance",
-    description: "Our team of certified personal trainers are dedicated to helping you achieve your fitness goals. With personalized workout plans, nutritional guidance, and constant motivation, you'll see results faster than ever.",
+    tagline: "Expert guidance to achieve your fitness goals faster",
+    category: "Training Services",
+    description: "Our team of certified personal trainers are dedicated to helping you achieve your fitness goals.",
+    longDescription: "With personalized workout plans, nutritional guidance, and constant motivation, you'll see results faster than ever. Our trainers have extensive experience in weight loss, muscle building, sports conditioning, and rehabilitation. Each session is tailored to your specific needs and fitness level.",
+    heroImage: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800",
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800",
+      "https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=800",
+    ],
+    icon: createElement(Users, { className: "w-5 h-5" }),
+    color: "from-amber-500 to-yellow-500",
     features: [
-      "Certified and experienced trainers",
-      "One-on-one training sessions",
-      "Customized workout plans",
-      "Nutrition and diet consultation",
-      "Regular progress tracking",
-      "Flexible scheduling",
+      { icon: createElement(Trophy, { className: "w-5 h-5" }), title: "Certified Experts", description: "Nationally certified trainers" },
+      { icon: createElement(Target, { className: "w-5 h-5" }), title: "Custom Plans", description: "Tailored to your goals" },
+      { icon: createElement(Activity, { className: "w-5 h-5" }), title: "Progress Tracking", description: "Regular assessments" },
+      { icon: createElement(Heart, { className: "w-5 h-5" }), title: "Nutrition Guide", description: "Complete diet planning" },
     ],
     benefits: [
       "Faster and better results",
@@ -95,28 +111,34 @@ export const amenitiesData: AmenityDetail[] = [
       "Personalized attention",
       "Expert nutritional advice",
     ],
-    trainer: "15+ certified trainers available",
-    image: "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800",
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800",
-      "https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=800",
+    schedule: [
+      { day: "Mon - Sat", time: "5:00 AM - 10:00 PM" },
+      { day: "Sunday", time: "7:00 AM - 6:00 PM" },
     ],
-    icon: "Users",
-    color: "from-red-500 to-orange-400",
+    trainer: {
+      name: "Rajesh Kumar",
+      experience: "12+ years experience",
+    },
   },
-  {
-    id: "free-trial",
+  "free-trial": {
     title: "Free Trial",
-    shortDesc: "Try before joining",
-    description: "We're confident you'll love our gym! That's why we offer a complimentary 1-day trial pass. Experience our world-class facilities, equipment, and atmosphere before making any commitment.",
+    tagline: "Experience our world-class gym before you commit",
+    category: "Membership",
+    description: "We're confident you'll love our gym! That's why we offer a complimentary 1-day trial pass.",
+    longDescription: "Experience our world-class facilities, premium equipment, and welcoming atmosphere before making any commitment. During your trial, you'll have full access to all gym areas, group classes, and even a consultation with one of our trainers. No obligation, no pressure—just pure fitness.",
+    heroImage: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800",
+      "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=800",
+      "https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800",
+    ],
+    icon: createElement(Gift, { className: "w-5 h-5" }),
+    color: "from-green-500 to-emerald-500",
     features: [
-      "Full access to all facilities",
-      "Use of all equipment",
-      "Join any group class",
-      "Locker room access",
-      "Trainer consultation included",
-      "No obligation to join",
+      { icon: createElement(Zap, { className: "w-5 h-5" }), title: "Full Access", description: "All facilities included" },
+      { icon: createElement(Dumbbell, { className: "w-5 h-5" }), title: "Equipment", description: "Use any machine" },
+      { icon: createElement(Users, { className: "w-5 h-5" }), title: "Group Classes", description: "Join any session" },
+      { icon: createElement(Target, { className: "w-5 h-5" }), title: "Consultation", description: "Free trainer meet" },
     ],
     benefits: [
       "Experience the gym firsthand",
@@ -126,27 +148,30 @@ export const amenitiesData: AmenityDetail[] = [
       "Make an informed decision",
       "Get a workout routine suggestion",
     ],
-    image: "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1534438327276-14e5300c3a48?w=800",
-      "https://images.unsplash.com/photo-1558611848-73f7eb4001a1?w=800",
-      "https://images.unsplash.com/photo-1576678927484-cc907957088c?w=800",
+    schedule: [
+      { day: "Mon - Sat", time: "5:00 AM - 11:00 PM" },
+      { day: "Sunday", time: "6:00 AM - 9:00 PM" },
     ],
-    icon: "Ticket",
-    color: "from-green-500 to-emerald-400",
   },
-  {
-    id: "zumba-classes",
+  "zumba-classes": {
     title: "Zumba Classes",
-    shortDesc: "Dance to fitness",
-    description: "Get fit while having fun with our energetic Zumba classes! Our certified Zumba instructors lead high-energy dance workouts that combine Latin and international music with dance moves.",
+    tagline: "Dance your way to fitness with high-energy moves",
+    category: "Group Classes",
+    description: "Get fit while having fun with our energetic Zumba classes!",
+    longDescription: "Our certified Zumba instructors lead high-energy dance workouts that combine Latin and international music with dance moves. Whether you're a beginner or experienced dancer, our classes are designed to be fun, effective, and suitable for all fitness levels. Burn calories while grooving to amazing beats!",
+    heroImage: "https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?w=800",
+      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800",
+      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800",
+    ],
+    icon: createElement(Music, { className: "w-5 h-5" }),
+    color: "from-pink-500 to-rose-500",
     features: [
-      "Certified Zumba instructors",
-      "Multiple classes daily",
-      "All fitness levels welcome",
-      "High-energy music playlist",
-      "Air-conditioned studio",
-      "Group motivation",
+      { icon: createElement(Trophy, { className: "w-5 h-5" }), title: "Certified Instructors", description: "Licensed Zumba trainers" },
+      { icon: createElement(Music, { className: "w-5 h-5" }), title: "Great Music", description: "Latest dance tracks" },
+      { icon: createElement(Users, { className: "w-5 h-5" }), title: "All Levels", description: "Beginners welcome" },
+      { icon: createElement(Flame, { className: "w-5 h-5" }), title: "High Energy", description: "Fun cardio workout" },
     ],
     benefits: [
       "Burns 400-600 calories per session",
@@ -156,28 +181,34 @@ export const amenitiesData: AmenityDetail[] = [
       "Social and fun atmosphere",
       "Improves coordination and rhythm",
     ],
-    schedule: "Mon, Wed, Fri: 7 AM, 6 PM | Sat: 8 AM",
-    image: "https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1524594152303-9fd13543fe6e?w=800",
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800",
-      "https://images.unsplash.com/photo-1571902943202-507ec2618e8f?w=800",
+    schedule: [
+      { day: "Mon, Wed, Fri", time: "7:00 AM & 6:00 PM" },
+      { day: "Saturday", time: "8:00 AM" },
     ],
-    icon: "Music",
-    color: "from-pink-500 to-rose-400",
+    trainer: {
+      name: "Priya Sharma",
+      experience: "8+ years in Zumba",
+    },
   },
-  {
-    id: "strength-training",
+  "strength-training": {
     title: "Strength Training",
-    shortDesc: "Build muscle",
-    description: "Our fully-equipped strength training area features premium weight machines, free weights, and power racks. Whether you're a beginner or an advanced lifter, we have everything you need to build strength.",
+    tagline: "Build muscle and power with premium equipment",
+    category: "Weight Training",
+    description: "Our fully-equipped strength training area features premium weight machines, free weights, and power racks.",
+    longDescription: "Whether you're a beginner or an advanced lifter, we have everything you need to build strength and muscle. Our weight room includes dumbbells ranging from 2.5kg to 50kg, multiple squat racks, cable machines, smith machines, and dedicated bench press stations. Olympic lifting platforms are available for serious lifters.",
+    heroImage: "https://images.unsplash.com/photo-1534368959876-26bf04f2c947?w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1534368959876-26bf04f2c947?w=800",
+      "https://images.unsplash.com/photo-1533681904393-9ab6eee7e408?w=800",
+      "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800",
+    ],
+    icon: createElement(Dumbbell, { className: "w-5 h-5" }),
+    color: "from-blue-500 to-cyan-500",
     features: [
-      "Premium free weights (2.5kg - 50kg)",
-      "Multiple squat racks and power cages",
-      "Cable machines and smith machines",
-      "Dedicated bench press stations",
-      "Olympic lifting platforms",
-      "Chalk and lifting belts available",
+      { icon: createElement(Dumbbell, { className: "w-5 h-5" }), title: "Free Weights", description: "2.5kg - 50kg range" },
+      { icon: createElement(Target, { className: "w-5 h-5" }), title: "Power Racks", description: "Multiple stations" },
+      { icon: createElement(Activity, { className: "w-5 h-5" }), title: "Machines", description: "Full cable system" },
+      { icon: createElement(Trophy, { className: "w-5 h-5" }), title: "Olympic Platforms", description: "For serious lifters" },
     ],
     benefits: [
       "Build lean muscle mass",
@@ -187,27 +218,34 @@ export const amenitiesData: AmenityDetail[] = [
       "Enhanced body composition",
       "Better functional fitness",
     ],
-    image: "https://images.unsplash.com/photo-1534368959876-26bf04f2c947?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1534368959876-26bf04f2c947?w=800",
-      "https://images.unsplash.com/photo-1533681904393-9ab6eee7e408?w=800",
-      "https://images.unsplash.com/photo-1526506118085-60ce8714f8c5?w=800",
+    schedule: [
+      { day: "Mon - Sat", time: "5:00 AM - 11:00 PM" },
+      { day: "Sunday", time: "6:00 AM - 9:00 PM" },
     ],
-    icon: "Dumbbell",
-    color: "from-orange-500 to-amber-400",
+    trainer: {
+      name: "Vikram Singh",
+      experience: "10+ years in strength coaching",
+    },
   },
-  {
-    id: "functional-workouts",
+  "functional-workouts": {
     title: "Functional Workouts",
-    shortDesc: "Real-world fitness",
-    description: "Train for real life with our functional training area. These workouts focus on movements that help you perform everyday activities better while building overall strength and mobility.",
+    tagline: "Train for real life with dynamic movements",
+    category: "Functional Training",
+    description: "Train for real life with our functional training area.",
+    longDescription: "These workouts focus on movements that help you perform everyday activities better while building overall strength and mobility. Our functional training zone includes TRX suspension trainers, battle ropes, kettlebells, plyometric boxes, and much more. Perfect for those who want practical fitness.",
+    heroImage: "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=1200",
+    gallery: [
+      "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=800",
+      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800",
+      "https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=800",
+    ],
+    icon: createElement(Activity, { className: "w-5 h-5" }),
+    color: "from-purple-500 to-violet-500",
     features: [
-      "TRX suspension trainers",
-      "Battle ropes and slam balls",
-      "Kettlebells and medicine balls",
-      "Plyometric boxes",
-      "Resistance bands",
-      "Agility ladders and cones",
+      { icon: createElement(Target, { className: "w-5 h-5" }), title: "TRX Training", description: "Suspension workouts" },
+      { icon: createElement(Flame, { className: "w-5 h-5" }), title: "Battle Ropes", description: "High-intensity cardio" },
+      { icon: createElement(Dumbbell, { className: "w-5 h-5" }), title: "Kettlebells", description: "Dynamic movements" },
+      { icon: createElement(Zap, { className: "w-5 h-5" }), title: "Plyometrics", description: "Explosive power" },
     ],
     benefits: [
       "Improves daily life movements",
@@ -217,173 +255,13 @@ export const amenitiesData: AmenityDetail[] = [
       "Reduces injury risk",
       "Full body conditioning",
     ],
-    schedule: "Classes: Tue, Thu: 7 AM, 7 PM",
-    image: "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1599058945522-28d584b6f0ff?w=800",
-      "https://images.unsplash.com/photo-1517836357463-d25dfeac3438?w=800",
-      "https://images.unsplash.com/photo-1593079831268-3381b0db4a77?w=800",
+    schedule: [
+      { day: "Tue, Thu", time: "7:00 AM & 7:00 PM" },
+      { day: "Saturday", time: "9:00 AM" },
     ],
-    icon: "Activity",
-    color: "from-yellow-500 to-orange-400",
+    trainer: {
+      name: "Amit Verma",
+      experience: "7+ years in functional fitness",
+    },
   },
-  {
-    id: "crossfit",
-    title: "CrossFit",
-    shortDesc: "High intensity",
-    description: "Push your limits with our CrossFit program! Our certified CrossFit coaches lead intense, varied workouts that combine weightlifting, cardio, and bodyweight exercises for maximum results.",
-    features: [
-      "Certified CrossFit coaches",
-      "Daily WODs (Workout of the Day)",
-      "Fully equipped CrossFit box",
-      "Scalable workouts for all levels",
-      "Community-driven atmosphere",
-      "Regular competitions and challenges",
-    ],
-    benefits: [
-      "Extreme calorie burn",
-      "Builds strength and endurance",
-      "Improves athletic performance",
-      "Strong community support",
-      "Constant variety keeps you engaged",
-      "Mental toughness development",
-    ],
-    schedule: "Daily: 6 AM, 7 AM, 5 PM, 6 PM, 7 PM",
-    image: "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1541534741688-6078c6bfb5c5?w=800",
-      "https://images.unsplash.com/photo-1533681904393-9ab6eee7e408?w=800",
-      "https://images.unsplash.com/photo-1517963879433-6ad2b056d712?w=800",
-    ],
-    icon: "Flame",
-    color: "from-red-600 to-orange-500",
-  },
-  {
-    id: "power-yoga",
-    title: "Power Yoga",
-    shortDesc: "Mind & body",
-    description: "Find your balance with our Power Yoga classes. This dynamic form of yoga builds strength, flexibility, and mental clarity through flowing sequences and focused breathing.",
-    features: [
-      "Certified yoga instructors",
-      "Climate-controlled yoga studio",
-      "Yoga mats and props provided",
-      "Beginner to advanced classes",
-      "Morning and evening sessions",
-      "Meditation and breathing focus",
-    ],
-    benefits: [
-      "Increases flexibility",
-      "Builds core strength",
-      "Reduces stress and anxiety",
-      "Improves posture",
-      "Enhances mental clarity",
-      "Better sleep quality",
-    ],
-    schedule: "Daily: 6 AM, 7 PM | Sunday: 8 AM",
-    image: "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1544367567-0f2fcb009e0b?w=800",
-      "https://images.unsplash.com/photo-1506126613408-eca07ce68773?w=800",
-      "https://images.unsplash.com/photo-1575052814086-f385e2e2ad1b?w=800",
-    ],
-    icon: "Heart",
-    color: "from-purple-500 to-violet-400",
-  },
-  {
-    id: "hiit-training",
-    title: "HIIT Training",
-    shortDesc: "Maximum results",
-    description: "Get maximum results in minimum time with our High-Intensity Interval Training classes. These short, intense workouts alternate between bursts of activity and brief rest periods.",
-    features: [
-      "30-45 minute sessions",
-      "Expert HIIT trainers",
-      "Heart rate monitoring available",
-      "Variety of exercises each class",
-      "Suitable for all fitness levels",
-      "High-energy group environment",
-    ],
-    benefits: [
-      "Burns calories for hours after workout",
-      "Improves cardiovascular health",
-      "Boosts metabolism",
-      "Time-efficient workouts",
-      "No equipment needed",
-      "Builds endurance quickly",
-    ],
-    schedule: "Mon-Sat: 6 AM, 12 PM, 6 PM",
-    image: "https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1434682881908-b43d0467b798?w=800",
-      "https://images.unsplash.com/photo-1518611012118-696072aa579a?w=800",
-      "https://images.unsplash.com/photo-1549576490-b0b4831ef60a?w=800",
-    ],
-    icon: "Timer",
-    color: "from-amber-500 to-yellow-400",
-  },
-  {
-    id: "recovery-zone",
-    title: "Recovery Zone",
-    shortDesc: "Post-workout care",
-    description: "Recovery is as important as the workout itself. Our dedicated recovery zone features foam rollers, massage tools, stretching areas, and relaxation spaces to help your body heal and grow.",
-    features: [
-      "Foam rollers and massage balls",
-      "Stretching and mobility area",
-      "Massage chairs",
-      "Compression therapy devices",
-      "Quiet relaxation space",
-      "Recovery guidance from trainers",
-    ],
-    benefits: [
-      "Faster muscle recovery",
-      "Reduced muscle soreness",
-      "Improved flexibility",
-      "Better workout performance",
-      "Injury prevention",
-      "Mental relaxation",
-    ],
-    image: "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1600334129128-685c5582fd35?w=800",
-      "https://images.unsplash.com/photo-1544161515-4ab6ce6db874?w=800",
-      "https://images.unsplash.com/photo-1540555700478-4be289fbecef?w=800",
-    ],
-    icon: "Sparkles",
-    color: "from-indigo-500 to-purple-400",
-  },
-  {
-    id: "body-transform",
-    title: "Body Transform",
-    shortDesc: "Complete programs",
-    description: "Ready for a complete transformation? Our Body Transform programs are designed to help you achieve dramatic results through structured workout plans, nutrition coaching, and ongoing support.",
-    features: [
-      "8-12 week structured programs",
-      "Personalized workout plans",
-      "Nutrition and meal planning",
-      "Weekly progress tracking",
-      "Body composition analysis",
-      "Before/after documentation",
-    ],
-    benefits: [
-      "Dramatic visible results",
-      "Sustainable lifestyle changes",
-      "Complete body makeover",
-      "Increased confidence",
-      "Long-term healthy habits",
-      "Expert support throughout",
-    ],
-    trainer: "Dedicated transformation coaches",
-    image: "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=1200",
-    gallery: [
-      "https://images.unsplash.com/photo-1583454110551-21f2fa2afe61?w=800",
-      "https://images.unsplash.com/photo-1571019614242-c5c5dee9f50b?w=800",
-      "https://images.unsplash.com/photo-1581009146145-b5ef050c149a?w=800",
-    ],
-    icon: "Trophy",
-    color: "from-red-500 to-orange-500",
-  },
-];
-
-export function getAmenityBySlug(slug: string): AmenityDetail | undefined {
-  return amenitiesData.find((amenity) => amenity.id === slug);
-}
-
+};

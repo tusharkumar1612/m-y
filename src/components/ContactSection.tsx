@@ -3,71 +3,38 @@
 import { motion } from "framer-motion";
 import { useInView } from "framer-motion";
 import { useRef } from "react";
-import {
-  MapPin,
-  Phone,
-  Mail,
-  Clock,
-  Instagram,
-  Facebook,
-  Youtube,
-  MessageCircle,
-  ArrowUpRight,
-  Dumbbell,
-} from "lucide-react";
+import { MapPin, Phone, Mail, Clock, Instagram, Facebook, Youtube, Twitter } from "lucide-react";
 
 const contactInfo = [
   {
-    icon: <MapPin className="w-6 h-6" />,
-    title: "Visit Us",
-    content: "2nd Floor, Vaishali Nagar,\nNear Gurudwara, Jaipur",
-    link: "https://maps.google.com/?q=M%26Y+Fitness+Club+Vaishali+Nagar+Jaipur",
+    icon: <MapPin className="w-5 h-5" />,
+    title: "Address",
+    content: "2nd Floor, Vaishali Nagar, Near Gurudwara, Jaipur",
   },
   {
-    icon: <Phone className="w-6 h-6" />,
-    title: "Call Us",
+    icon: <Phone className="w-5 h-5" />,
+    title: "Phone",
     content: "9660223315",
-    link: "tel:9660223315",
+    href: "tel:9660223315",
   },
   {
-    icon: <Mail className="w-6 h-6" />,
-    title: "Email Us",
+    icon: <Mail className="w-5 h-5" />,
+    title: "Email",
     content: "team@mnyfitnessclub.com",
-    link: "mailto:team@mnyfitnessclub.com",
+    href: "mailto:team@mnyfitnessclub.com",
   },
   {
-    icon: <Clock className="w-6 h-6" />,
-    title: "Opening Hours",
-    content: "Mon - Sat: 5:30 AM - 10:00 PM\nSunday: 6:00 AM - 12:00 PM",
-    link: null,
+    icon: <Clock className="w-5 h-5" />,
+    title: "Timings",
+    content: "5:00 AM - 11:00 PM (Mon-Sat)",
   },
 ];
 
 const socialLinks = [
-  {
-    icon: <Instagram className="w-5 h-5" />,
-    name: "Instagram",
-    href: "#",
-    color: "bg-gradient-to-r from-purple-500 to-pink-500",
-  },
-  {
-    icon: <Facebook className="w-5 h-5" />,
-    name: "Facebook",
-    href: "#",
-    color: "bg-blue-600",
-  },
-  {
-    icon: <Youtube className="w-5 h-5" />,
-    name: "YouTube",
-    href: "#",
-    color: "bg-red-600",
-  },
-  {
-    icon: <MessageCircle className="w-5 h-5" />,
-    name: "WhatsApp",
-    href: "https://wa.me/919660223315",
-    color: "bg-green-600",
-  },
+  { icon: <Instagram className="w-5 h-5" />, href: "#", label: "Instagram" },
+  { icon: <Facebook className="w-5 h-5" />, href: "#", label: "Facebook" },
+  { icon: <Youtube className="w-5 h-5" />, href: "#", label: "YouTube" },
+  { icon: <Twitter className="w-5 h-5" />, href: "#", label: "Twitter" },
 ];
 
 export default function ContactSection() {
@@ -75,147 +42,99 @@ export default function ContactSection() {
   const isInView = useInView(ref, { once: true, margin: "-100px" });
 
   return (
-    <section id="contact" className="relative py-24 overflow-hidden">
-      {/* Background */}
-      <div className="absolute inset-0 bg-zinc-950" />
-      <div className="absolute inset-0 gym-stripes opacity-30" />
-      
-      {/* Accent glows */}
-      <div className="absolute top-1/3 left-0 w-80 h-80 bg-red-600/10 rounded-full blur-[150px]" />
-      <div className="absolute bottom-1/3 right-0 w-80 h-80 bg-orange-500/10 rounded-full blur-[150px]" />
-
-      <div className="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
-        {/* Section header */}
+    <section id="contact" className="relative py-24 bg-white">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8" ref={ref}>
         <motion.div
           initial={{ opacity: 0, y: 30 }}
           animate={isInView ? { opacity: 1, y: 0 } : {}}
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <span className="inline-flex items-center gap-2 px-4 py-2 rounded-lg bg-zinc-900 border border-zinc-700 mb-6">
-            <MapPin className="w-4 h-4 text-red-500" />
-            <span className="text-sm font-black text-zinc-300 tracking-wider uppercase">Find Us</span>
+          <span className="inline-block px-4 py-1.5 rounded-full bg-orange-50 border border-orange-100 text-sm font-semibold text-orange-600 mb-6">
+            Get In Touch
           </span>
           <h2
-            className="text-4xl sm:text-5xl md:text-6xl font-black text-white mb-4 uppercase tracking-tight"
+            className="text-4xl sm:text-5xl md:text-6xl font-black text-gray-900 mb-4"
             style={{ fontFamily: "var(--font-bebas)" }}
           >
-            Get In <span className="gradient-text">Touch</span>
+            Visit <span className="gradient-text">Our Club</span>
           </h2>
-          <p className="text-zinc-400 text-lg max-w-2xl mx-auto">
-            Visit us at our Vaishali Nagar location or reach out through any channel.
+          <p className="text-gray-600 text-lg max-w-2xl mx-auto">
+            Come experience Jaipur&apos;s best fitness facility
           </p>
         </motion.div>
 
-        <div className="grid lg:grid-cols-2 gap-12 items-start">
+        <div className="grid lg:grid-cols-2 gap-8">
           {/* Contact cards */}
           <motion.div
-            initial={{ opacity: 0, x: -50 }}
+            initial={{ opacity: 0, x: -30 }}
             animate={isInView ? { opacity: 1, x: 0 } : {}}
             transition={{ duration: 0.8, delay: 0.2 }}
             className="grid sm:grid-cols-2 gap-4"
           >
-            {contactInfo.map((item, index) => (
-              <motion.div
+            {contactInfo.map((info, index) => (
+              <div
                 key={index}
-                initial={{ opacity: 0, y: 20 }}
-                animate={isInView ? { opacity: 1, y: 0 } : {}}
-                transition={{ duration: 0.5, delay: 0.3 + index * 0.1 }}
-                className="group p-6 rounded-xl bg-zinc-900 border border-zinc-800 hover:border-red-500/30 transition-all duration-300"
+                className="card p-5 hover:border-orange-200 group"
               >
-                <div className="w-12 h-12 rounded-lg bg-zinc-800 flex items-center justify-center text-red-500 mb-4 group-hover:bg-red-500/20 transition-colors">
-                  {item.icon}
+                <div className="w-12 h-12 rounded-xl bg-orange-50 flex items-center justify-center text-orange-500 mb-4 group-hover:bg-orange-100 transition-colors">
+                  {info.icon}
                 </div>
-                <h3 className="text-lg font-black text-white mb-2 uppercase tracking-wide" style={{ fontFamily: "var(--font-oswald)" }}>
-                  {item.title}
-                </h3>
-                <p className="text-zinc-400 whitespace-pre-line text-sm leading-relaxed">
-                  {item.content}
-                </p>
-                {item.link && (
+                <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-1">
+                  {info.title}
+                </h4>
+                {info.href ? (
                   <a
-                    href={item.link}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-1 mt-3 text-red-400 text-sm font-bold hover:text-orange-400 transition-colors uppercase tracking-wide"
+                    href={info.href}
+                    className="text-gray-900 font-medium hover:text-orange-600 transition-colors"
                   >
-                    <span>Open</span>
-                    <ArrowUpRight className="w-4 h-4" />
+                    {info.content}
                   </a>
+                ) : (
+                  <p className="text-gray-900 font-medium">{info.content}</p>
                 )}
-              </motion.div>
-            ))}
-          </motion.div>
-
-          {/* Map and social */}
-          <motion.div
-            initial={{ opacity: 0, x: 50 }}
-            animate={isInView ? { opacity: 1, x: 0 } : {}}
-            transition={{ duration: 0.8, delay: 0.4 }}
-            className="space-y-6"
-          >
-            {/* Map placeholder */}
-            <div className="relative h-64 rounded-xl overflow-hidden border border-zinc-800 bg-zinc-900">
-              <div className="absolute inset-0 flex items-center justify-center">
-                <div className="text-center">
-                  <div className="w-16 h-16 mx-auto mb-4 bg-gradient-to-br from-red-600 to-orange-500 rounded-xl flex items-center justify-center fire-glow">
-                    <Dumbbell className="w-8 h-8 text-white" />
-                  </div>
-                  <p className="text-zinc-400 mb-4 font-bold">M&Y Fitness Club</p>
-                  <a
-                    href="https://maps.google.com/?q=M%26Y+Fitness+Club+Vaishali+Nagar+Jaipur"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="inline-flex items-center gap-2 px-6 py-3 bg-gradient-to-r from-red-600 to-orange-500 rounded-lg text-white font-bold hover:scale-105 transition-transform uppercase tracking-wide"
-                  >
-                    <span>Open in Maps</span>
-                    <ArrowUpRight className="w-4 h-4" />
-                  </a>
-                </div>
               </div>
-            </div>
+            ))}
 
             {/* Social links */}
-            <div className="p-6 rounded-xl bg-zinc-900 border border-zinc-800">
-              <h3 className="text-lg font-black text-white mb-4 uppercase tracking-wide" style={{ fontFamily: "var(--font-oswald)" }}>
+            <div className="sm:col-span-2 card p-5">
+              <h4 className="text-sm font-semibold text-gray-500 uppercase tracking-wider mb-4">
                 Follow Us
-              </h3>
-              <div className="flex flex-wrap gap-3">
+              </h4>
+              <div className="flex gap-3">
                 {socialLinks.map((social, index) => (
                   <motion.a
                     key={index}
                     href={social.href}
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className={`flex items-center gap-2 px-4 py-2.5 rounded-lg ${social.color} text-white font-bold hover:scale-105 transition-transform uppercase text-sm tracking-wide`}
-                    whileHover={{ scale: 1.05 }}
+                    className="w-12 h-12 rounded-xl bg-gray-100 flex items-center justify-center text-gray-600 hover:bg-orange-500 hover:text-white transition-all"
+                    whileHover={{ scale: 1.1 }}
                     whileTap={{ scale: 0.95 }}
+                    aria-label={social.label}
                   >
                     {social.icon}
-                    <span>{social.name}</span>
                   </motion.a>
                 ))}
               </div>
             </div>
+          </motion.div>
 
-            {/* Quick contact */}
-            <div className="p-6 rounded-xl bg-green-900/20 border border-green-700/30">
-              <h3 className="text-lg font-black text-white mb-3 uppercase tracking-wide" style={{ fontFamily: "var(--font-oswald)" }}>
-                Quick Contact
-              </h3>
-              <p className="text-zinc-400 text-sm mb-4">
-                Have questions? WhatsApp us for instant support!
-              </p>
-              <a
-                href="https://wa.me/919660223315?text=Hi,%20I'm%20interested%20in%20the%20winter%20gym%20offer!"
-                target="_blank"
-                rel="noopener noreferrer"
-                className="inline-flex items-center gap-2 px-6 py-3 bg-green-600 rounded-lg text-white font-bold hover:bg-green-500 transition-colors uppercase tracking-wide"
-              >
-                <MessageCircle className="w-5 h-5" />
-                <span>Chat on WhatsApp</span>
-              </a>
-            </div>
+          {/* Map */}
+          <motion.div
+            initial={{ opacity: 0, x: 30 }}
+            animate={isInView ? { opacity: 1, x: 0 } : {}}
+            transition={{ duration: 0.8, delay: 0.4 }}
+            className="rounded-2xl overflow-hidden border border-gray-200 h-[400px] shadow-clean"
+          >
+            <iframe
+              src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3558.8878461847193!2d75.72899231503!3d26.91287668312!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x396db3e3c3e3e3e3%3A0x0!2sVaishali%20Nagar%2C%20Jaipur!5e0!3m2!1sen!2sin!4v1234567890"
+              width="100%"
+              height="100%"
+              style={{ border: 0 }}
+              allowFullScreen
+              loading="lazy"
+              referrerPolicy="no-referrer-when-downgrade"
+              title="M&Y Fitness Club Location"
+            />
           </motion.div>
         </div>
       </div>

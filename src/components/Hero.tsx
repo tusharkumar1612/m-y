@@ -1,7 +1,7 @@
 "use client";
 
 import { motion } from "framer-motion";
-import { ChevronDown, Flame, Zap } from "lucide-react";
+import { ChevronDown, Play, Star } from "lucide-react";
 import dynamic from "next/dynamic";
 
 const Scene3D = dynamic(() => import("./Scene3D"), { ssr: false });
@@ -17,44 +17,36 @@ export default function Hero() {
   return (
     <section
       id="home"
-      className="relative min-h-screen flex items-center justify-center overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center overflow-hidden bg-white"
     >
-      {/* Dark gym background */}
-      <div className="absolute inset-0 bg-gradient-to-br from-black via-zinc-950 to-black" />
+      {/* Subtle background patterns */}
+      <div className="absolute inset-0 hero-pattern-light" />
+      <div className="absolute inset-0 grid-pattern-light" />
       
-      {/* Gym texture patterns */}
-      <div className="absolute inset-0 gym-stripes" />
-      <div className="absolute inset-0 gym-texture" />
-      <div className="absolute inset-0 gym-floor opacity-50" />
-      
-      {/* Red accent glow spots */}
-      <div className="absolute top-1/4 right-1/4 w-96 h-96 bg-red-600/20 rounded-full blur-[150px]" />
-      <div className="absolute bottom-1/3 left-1/4 w-80 h-80 bg-orange-500/15 rounded-full blur-[120px]" />
+      {/* Decorative elements */}
+      <div className="absolute top-20 right-10 w-72 h-72 bg-orange-100 rounded-full blur-3xl opacity-60" />
+      <div className="absolute bottom-20 left-10 w-96 h-96 bg-amber-100 rounded-full blur-3xl opacity-40" />
       
       {/* 3D Background */}
       <Scene3D />
 
-      {/* Bottom gradient */}
-      <div className="absolute inset-0 bg-gradient-to-t from-black via-transparent to-transparent" />
-
-      {/* Diagonal accent lines */}
-      <div className="absolute top-20 left-0 w-full h-1 bg-gradient-to-r from-transparent via-red-500/30 to-transparent transform -rotate-3" />
-      <div className="absolute bottom-40 left-0 w-full h-0.5 bg-gradient-to-r from-transparent via-orange-500/20 to-transparent transform rotate-2" />
-
       {/* Content */}
-      <div className="relative z-10 max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center">
-        {/* Power badge */}
+      <div className="relative z-10 max-w-6xl mx-auto px-4 sm:px-6 lg:px-8 text-center pt-20">
+        {/* Badge */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6 }}
-          className="inline-flex items-center gap-2 px-5 py-2 rounded-full bg-red-500/10 border border-red-500/30 mb-8"
+          className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-orange-50 border border-orange-100 mb-8"
         >
-          <Flame className="w-4 h-4 text-red-500 animate-pulse" />
-          <span className="text-sm font-bold text-red-400 tracking-wider uppercase">
-            Unleash Your Power
+          <div className="flex items-center gap-1">
+            {[...Array(5)].map((_, i) => (
+              <Star key={i} className="w-3 h-3 fill-amber-400 text-amber-400" />
+            ))}
+          </div>
+          <span className="text-sm font-medium text-gray-700">
+            Rated #1 Gym in Vaishali Nagar
           </span>
-          <Zap className="w-4 h-4 text-orange-400" />
         </motion.div>
 
         {/* Main headline */}
@@ -62,15 +54,11 @@ export default function Hero() {
           initial={{ opacity: 0, y: 30 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.1 }}
-          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none mb-6 tracking-tight"
+          className="text-5xl sm:text-6xl md:text-7xl lg:text-8xl font-black leading-none mb-6"
           style={{ fontFamily: "var(--font-bebas)" }}
         >
-          <span className="block text-white drop-shadow-[0_0_30px_rgba(239,68,68,0.3)]">
-            BUILD YOUR
-          </span>
-          <span className="block gradient-text mt-1 drop-shadow-[0_0_40px_rgba(239,68,68,0.4)]">
-            STRONGEST SELF
-          </span>
+          <span className="block text-gray-900">Transform Your</span>
+          <span className="block gradient-text">Body & Mind</span>
         </motion.h1>
 
         {/* Sub-text */}
@@ -78,10 +66,10 @@ export default function Hero() {
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.3 }}
-          className="text-lg sm:text-xl text-zinc-400 max-w-2xl mx-auto mb-10 leading-relaxed"
+          className="text-lg sm:text-xl text-gray-600 max-w-2xl mx-auto mb-10 leading-relaxed"
         >
-          <span className="text-white font-semibold">M&Y Fitness Club</span> — 
-          Jaipur&apos;s most powerful gym with elite trainers, heavy iron, and results that speak.
+          Join <span className="text-gray-900 font-semibold">M&Y Fitness Club</span> — 
+          Jaipur&apos;s premier fitness destination with expert trainers and world-class facilities.
         </motion.p>
 
         {/* CTA Buttons */}
@@ -93,49 +81,46 @@ export default function Hero() {
         >
           <motion.button
             onClick={scrollToForm}
-            className="group px-10 py-4 bg-gradient-to-r from-red-600 to-orange-500 rounded-lg text-white font-bold text-lg tracking-wide fire-glow uppercase"
+            className="group px-8 py-4 bg-gradient-to-r from-orange-500 to-amber-500 rounded-full text-white font-semibold text-lg btn-glow flex items-center gap-2"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
-            <span className="flex items-center gap-2">
-              <Flame className="w-5 h-5" />
-              Start Training
-              <motion.span
-                animate={{ x: [0, 5, 0] }}
-                transition={{ duration: 1.5, repeat: Infinity }}
-              >
-                →
-              </motion.span>
-            </span>
+            <span>Start Free Trial</span>
+            <motion.span
+              animate={{ x: [0, 4, 0] }}
+              transition={{ duration: 1.5, repeat: Infinity }}
+            >
+              →
+            </motion.span>
           </motion.button>
 
-          <motion.a
-            href="#offer"
-            className="px-10 py-4 rounded-lg border-2 border-zinc-700 text-white font-bold hover:border-red-500 hover:text-red-400 transition-all duration-300 uppercase tracking-wide"
+          <motion.button
+            className="px-8 py-4 rounded-full border-2 border-gray-200 text-gray-700 font-semibold flex items-center gap-2 hover:border-orange-400 hover:text-orange-600 transition-all"
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.98 }}
           >
-            Winter Offer
-          </motion.a>
+            <Play className="w-5 h-5" />
+            <span>Watch Video</span>
+          </motion.button>
         </motion.div>
 
-        {/* Stats - Gym achievements */}
+        {/* Stats */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8, delay: 0.7 }}
-          className="mt-16 grid grid-cols-3 gap-8 max-w-xl mx-auto"
+          className="mt-16 grid grid-cols-3 gap-8 max-w-lg mx-auto"
         >
           {[
-            { value: "500+", label: "MEMBERS" },
-            { value: "15+", label: "TRAINERS" },
-            { value: "50+", label: "CLASSES" },
+            { value: "500+", label: "Members" },
+            { value: "15+", label: "Trainers" },
+            { value: "50+", label: "Classes" },
           ].map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-4xl sm:text-5xl font-black gradient-text" style={{ fontFamily: "var(--font-bebas)" }}>
+              <div className="text-3xl sm:text-4xl font-black gradient-text" style={{ fontFamily: "var(--font-bebas)" }}>
                 {stat.value}
               </div>
-              <div className="text-xs text-zinc-500 font-bold tracking-widest mt-1">{stat.label}</div>
+              <div className="text-sm text-gray-500 font-medium mt-1">{stat.label}</div>
             </div>
           ))}
         </motion.div>
@@ -154,8 +139,8 @@ export default function Hero() {
           className="flex flex-col items-center gap-2 cursor-pointer"
           onClick={() => document.querySelector("#offer")?.scrollIntoView({ behavior: "smooth" })}
         >
-          <span className="text-xs text-zinc-600 tracking-widest font-bold">SCROLL</span>
-          <ChevronDown className="w-5 h-5 text-red-500" />
+          <span className="text-xs text-gray-400 tracking-widest font-medium">SCROLL</span>
+          <ChevronDown className="w-5 h-5 text-orange-500" />
         </motion.div>
       </motion.div>
     </section>

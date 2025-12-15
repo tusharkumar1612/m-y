@@ -13,7 +13,7 @@ function seededRandom(seed: number): () => number {
   };
 }
 
-// Floating Dumbbell - Main gym element
+// Floating Dumbbell - Clean design with orange theme (horizontal alignment)
 function FloatingDumbbell({ position, scale = 1, rotationSpeed = 0.5 }: { 
   position: [number, number, number]; 
   scale?: number;
@@ -23,62 +23,58 @@ function FloatingDumbbell({ position, scale = 1, rotationSpeed = 0.5 }: {
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * rotationSpeed) * 0.4;
-      groupRef.current.rotation.z = Math.cos(state.clock.elapsedTime * rotationSpeed * 0.7) * 0.15;
-      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.8) * 0.3;
+      groupRef.current.rotation.y = Math.sin(state.clock.elapsedTime * rotationSpeed) * 0.3;
+      groupRef.current.rotation.x = Math.cos(state.clock.elapsedTime * rotationSpeed * 0.7) * 0.1;
+      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.8) * 0.2;
     }
   });
 
   return (
-    <Float speed={1} rotationIntensity={0.3} floatIntensity={0.5}>
+    <Float speed={1} rotationIntensity={0.2} floatIntensity={0.4}>
       <group ref={groupRef} position={position} scale={scale}>
-        {/* Handle - Chrome bar */}
-        <mesh>
-          <cylinderGeometry args={[0.08, 0.08, 2.8, 32]} />
+        {/* Handle - Chrome bar (rotated to be horizontal along X-axis) */}
+        <mesh rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.06, 0.06, 2.5, 32]} />
           <meshStandardMaterial 
-            color="#9ca3af" 
-            metalness={0.95} 
-            roughness={0.05}
+            color="#d1d5db" 
+            metalness={0.9} 
+            roughness={0.1}
           />
         </mesh>
         
-        {/* Left weights */}
-        <mesh position={[-1.2, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <cylinderGeometry args={[0.45, 0.45, 0.15, 32]} />
+        {/* Left weights - Orange (vertical discs perpendicular to bar) */}
+        <mesh position={[-1.1, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.4, 0.4, 0.12, 32]} />
           <meshStandardMaterial 
-            color="#ef4444" 
-            metalness={0.4} 
-            roughness={0.3}
-            emissive="#ef4444"
-            emissiveIntensity={0.15}
+            color="#f97316" 
+            metalness={0.3} 
+            roughness={0.4}
           />
         </mesh>
-        <mesh position={[-1.0, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <cylinderGeometry args={[0.35, 0.35, 0.12, 32]} />
+        <mesh position={[-0.95, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.3, 0.3, 0.1, 32]} />
           <meshStandardMaterial 
-            color="#1f2937" 
-            metalness={0.6} 
-            roughness={0.2}
+            color="#374151" 
+            metalness={0.5} 
+            roughness={0.3}
           />
         </mesh>
         
-        {/* Right weights */}
-        <mesh position={[1.2, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <cylinderGeometry args={[0.45, 0.45, 0.15, 32]} />
+        {/* Right weights - Orange (vertical discs perpendicular to bar) */}
+        <mesh position={[1.1, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.4, 0.4, 0.12, 32]} />
           <meshStandardMaterial 
-            color="#ef4444" 
-            metalness={0.4} 
-            roughness={0.3}
-            emissive="#ef4444"
-            emissiveIntensity={0.15}
+            color="#f97316" 
+            metalness={0.3} 
+            roughness={0.4}
           />
         </mesh>
-        <mesh position={[1.0, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
-          <cylinderGeometry args={[0.35, 0.35, 0.12, 32]} />
+        <mesh position={[0.95, 0, 0]} rotation={[0, 0, Math.PI / 2]}>
+          <cylinderGeometry args={[0.3, 0.3, 0.1, 32]} />
           <meshStandardMaterial 
-            color="#1f2937" 
-            metalness={0.6} 
-            roughness={0.2}
+            color="#374151" 
+            metalness={0.5} 
+            roughness={0.3}
           />
         </mesh>
       </group>
@@ -86,8 +82,8 @@ function FloatingDumbbell({ position, scale = 1, rotationSpeed = 0.5 }: {
   );
 }
 
-// Weight Plate - Iconic gym element
-function WeightPlate({ position, size = 1, color = "#ef4444" }: { 
+// Weight Plate - Orange theme
+function WeightPlate({ position, size = 1, color = "#f97316" }: { 
   position: [number, number, number]; 
   size?: number;
   color?: string;
@@ -96,40 +92,38 @@ function WeightPlate({ position, size = 1, color = "#ef4444" }: {
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.3;
-      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.6 + position[0]) * 0.2;
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.2;
+      meshRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.5 + position[0]) * 0.15;
     }
   });
 
   return (
-    <Float speed={0.8} rotationIntensity={0.2} floatIntensity={0.8}>
+    <Float speed={0.6} rotationIntensity={0.15} floatIntensity={0.6}>
       <group ref={meshRef} position={position} scale={size}>
         {/* Outer ring */}
         <mesh>
-          <torusGeometry args={[0.8, 0.15, 16, 48]} />
+          <torusGeometry args={[0.7, 0.12, 16, 48]} />
           <meshStandardMaterial 
             color={color} 
-            metalness={0.5} 
+            metalness={0.4} 
             roughness={0.3}
-            emissive={color}
-            emissiveIntensity={0.1}
           />
         </mesh>
         {/* Inner plate */}
         <mesh>
-          <cylinderGeometry args={[0.65, 0.65, 0.12, 32]} />
+          <cylinderGeometry args={[0.55, 0.55, 0.08, 32]} />
           <meshStandardMaterial 
-            color="#1f2937" 
-            metalness={0.7} 
+            color="#374151" 
+            metalness={0.6} 
             roughness={0.2}
           />
         </mesh>
         {/* Center hole */}
         <mesh>
-          <torusGeometry args={[0.15, 0.08, 16, 32]} />
+          <torusGeometry args={[0.12, 0.06, 16, 32]} />
           <meshStandardMaterial 
-            color="#9ca3af" 
-            metalness={0.9} 
+            color="#d1d5db" 
+            metalness={0.8} 
             roughness={0.1}
           />
         </mesh>
@@ -138,7 +132,7 @@ function WeightPlate({ position, size = 1, color = "#ef4444" }: {
   );
 }
 
-// Kettlebell
+// Kettlebell - Orange handle
 function Kettlebell({ position, scale = 1 }: { 
   position: [number, number, number]; 
   scale?: number;
@@ -147,32 +141,30 @@ function Kettlebell({ position, scale = 1 }: {
 
   useFrame((state) => {
     if (groupRef.current) {
-      groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.5) * 0.1;
-      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.7) * 0.15;
+      groupRef.current.rotation.z = Math.sin(state.clock.elapsedTime * 0.4) * 0.08;
+      groupRef.current.position.y = position[1] + Math.sin(state.clock.elapsedTime * 0.6) * 0.1;
     }
   });
 
   return (
-    <Float speed={1.2} rotationIntensity={0.2} floatIntensity={0.6}>
+    <Float speed={1} rotationIntensity={0.15} floatIntensity={0.5}>
       <group ref={groupRef} position={position} scale={scale}>
         {/* Main ball */}
-        <mesh position={[0, -0.2, 0]}>
-          <sphereGeometry args={[0.4, 32, 32]} />
+        <mesh position={[0, -0.15, 0]}>
+          <sphereGeometry args={[0.35, 32, 32]} />
           <meshStandardMaterial 
             color="#374151" 
-            metalness={0.6} 
+            metalness={0.5} 
             roughness={0.3}
           />
         </mesh>
-        {/* Handle */}
-        <mesh position={[0, 0.3, 0]} rotation={[0, 0, 0]}>
-          <torusGeometry args={[0.25, 0.06, 16, 32, Math.PI]} />
+        {/* Handle - Orange */}
+        <mesh position={[0, 0.25, 0]}>
+          <torusGeometry args={[0.2, 0.05, 16, 32, Math.PI]} />
           <meshStandardMaterial 
-            color="#ef4444" 
-            metalness={0.5} 
+            color="#f97316" 
+            metalness={0.4} 
             roughness={0.3}
-            emissive="#ef4444"
-            emissiveIntensity={0.1}
           />
         </mesh>
       </group>
@@ -182,7 +174,7 @@ function Kettlebell({ position, scale = 1 }: {
 
 // Pre-generate particle data outside component for purity
 const PARTICLE_SEED = 12345;
-const PARTICLE_COUNT = 80;
+const PARTICLE_COUNT = 50;
 
 function generateParticleData(count: number, seed: number) {
   const random = seededRandom(seed);
@@ -190,18 +182,21 @@ function generateParticleData(count: number, seed: number) {
   const colors = new Float32Array(count * 3);
   
   for (let i = 0; i < count; i++) {
-    positions[i * 3] = (random() - 0.5) * 18;
-    positions[i * 3 + 1] = (random() - 0.5) * 12;
-    positions[i * 3 + 2] = (random() - 0.5) * 6;
+    positions[i * 3] = (random() - 0.5) * 16;
+    positions[i * 3 + 1] = (random() - 0.5) * 10;
+    positions[i * 3 + 2] = (random() - 0.5) * 5;
     
-    // Red, orange, yellow particles
+    // Orange and amber particles
     const colorChoice = random();
     if (colorChoice < 0.4) {
-      colors[i * 3] = 0.94; colors[i * 3 + 1] = 0.27; colors[i * 3 + 2] = 0.27;
-    } else if (colorChoice < 0.7) {
+      // Orange particles
       colors[i * 3] = 0.98; colors[i * 3 + 1] = 0.45; colors[i * 3 + 2] = 0.09;
-    } else {
+    } else if (colorChoice < 0.7) {
+      // Amber particles
       colors[i * 3] = 0.98; colors[i * 3 + 1] = 0.75; colors[i * 3 + 2] = 0.14;
+    } else {
+      // Light gray particles
+      colors[i * 3] = 0.7; colors[i * 3 + 1] = 0.7; colors[i * 3 + 2] = 0.75;
     }
   }
   
@@ -211,7 +206,7 @@ function generateParticleData(count: number, seed: number) {
 // Pre-computed particle data
 const particleData = generateParticleData(PARTICLE_COUNT, PARTICLE_SEED);
 
-// Energy particles - Like sweat/energy in gym
+// Energy particles - Subtle floating dots
 function EnergyParticles() {
   const meshRef = useRef<THREE.Points>(null);
 
@@ -219,7 +214,7 @@ function EnergyParticles() {
 
   useFrame((state) => {
     if (meshRef.current) {
-      meshRef.current.rotation.y = state.clock.elapsedTime * 0.02;
+      meshRef.current.rotation.y = state.clock.elapsedTime * 0.015;
     }
   });
 
@@ -230,10 +225,10 @@ function EnergyParticles() {
         <bufferAttribute attach="attributes-color" args={[colors, 3]} />
       </bufferGeometry>
       <pointsMaterial
-        size={0.06}
+        size={0.04}
         vertexColors
         transparent
-        opacity={0.8}
+        opacity={0.6}
         sizeAttenuation
       />
     </points>
@@ -242,29 +237,27 @@ function EnergyParticles() {
 
 export default function Scene3D() {
   return (
-    <div className="absolute inset-0 z-0">
+    <div className="absolute inset-0 z-0 opacity-80">
       <Canvas
         camera={{ position: [0, 0, 8], fov: 50 }}
         gl={{ antialias: true, alpha: true }}
       >
-        {/* Warm gym lighting */}
-        <ambientLight intensity={0.4} />
-        <directionalLight position={[10, 10, 5]} intensity={1} color="#fff" />
-        <pointLight position={[-5, 5, 5]} intensity={0.8} color="#ef4444" />
-        <pointLight position={[5, -5, 5]} intensity={0.6} color="#f97316" />
-        <pointLight position={[0, 0, 10]} intensity={0.4} color="#fbbf24" />
-        <spotLight position={[0, 10, 0]} intensity={0.5} color="#fff" angle={0.5} />
+        {/* Clean, warm lighting */}
+        <ambientLight intensity={0.8} />
+        <directionalLight position={[10, 10, 5]} intensity={1.2} color="#fff" />
+        <directionalLight position={[-10, -10, -5]} intensity={0.4} color="#fff" />
+        <pointLight position={[0, 5, 5]} intensity={0.5} color="#fef3c7" />
         
-        {/* Gym equipment */}
-        <FloatingDumbbell position={[3.5, 0.5, 0]} scale={0.7} rotationSpeed={0.4} />
-        <FloatingDumbbell position={[-4, -1, -2]} scale={0.5} rotationSpeed={0.3} />
+        {/* Gym equipment - Orange themed */}
+        <FloatingDumbbell position={[4, 0.5, -1]} scale={0.6} rotationSpeed={0.3} />
+        <FloatingDumbbell position={[-4.5, -0.5, -2]} scale={0.45} rotationSpeed={0.25} />
         
-        <WeightPlate position={[-3, 1.5, -1]} size={0.6} color="#ef4444" />
-        <WeightPlate position={[4, -1.5, -2]} size={0.5} color="#f97316" />
-        <WeightPlate position={[-1, 2, -3]} size={0.4} color="#fbbf24" />
+        <WeightPlate position={[-3, 1.5, -1.5]} size={0.5} color="#f97316" />
+        <WeightPlate position={[4.5, -1, -2]} size={0.4} color="#fbbf24" />
+        <WeightPlate position={[-1.5, 2.5, -3]} size={0.35} color="#374151" />
         
-        <Kettlebell position={[2, -2, 0]} scale={0.8} />
-        <Kettlebell position={[-3.5, -0.5, 1]} scale={0.6} />
+        <Kettlebell position={[2.5, -1.5, 0]} scale={0.7} />
+        <Kettlebell position={[-3, -1, 0.5]} scale={0.5} />
         
         <EnergyParticles />
       </Canvas>
